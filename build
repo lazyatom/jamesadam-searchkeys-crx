@@ -1,0 +1,6 @@
+#!/bin/sh
+
+version=`cat manifest.json | grep "\"version\"" | cut -d":" -f2- | cut -d"\"" -f2`
+echo "Building version $version"
+cd .. && rm -f searchkeys.zip && zip -9r searchkeys.zip searchkeys-crx/manifest.json searchkeys-crx/searchkeys.* searchkeys-crx/icon*.png searchkeys-crx/COPYING.txt searchkeys-crx/README.txt && cd searchkeys-crx
+
