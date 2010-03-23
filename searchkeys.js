@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 var search_results = [];
+var next_link = null;
+var prev_link = null;
 
 function init_searchkey() {
     var injected_anything = false;
@@ -35,6 +37,20 @@ function init_searchkey() {
           break;
       }
     }
+    prev_link = document.querySelectorAll("#nav tr td:first-child a")[0]
+    if (prev_link) {
+      var elmShortcut = document.createElement("span");
+      elmShortcut.setAttribute("style", "font-weight:bold;color:#999");
+      elmShortcut.innerHTML = " [,]";
+      prev_link.childNodes[1].appendChild(elmShortcut, prev_link.firstChild);
+    }
+   next_link = document.querySelectorAll("#nav tr td:last-child a")[0]
+    if (next_link) {
+      var elmShortcut = document.createElement("span");
+      elmShortcut.setAttribute("style", "font-weight:bold;color:#999");
+      elmShortcut.innerHTML = " [.]";
+      next_link.appendChild(elmShortcut);
+    }    
     return injected_anything;
 }
 
@@ -53,6 +69,16 @@ function handle_searchkey(e) {
       var evObj = document.createEvent("MouseEvents");
       evObj.initEvent("click", true, false);
       result_node.dispatchEvent(evObj);
+    } else if (e.keyCode == 188 && prev_link) {
+      prev_link.focus();
+      var evObj = document.createEvent("MouseEvents");
+      evObj.initEvent("click", true, false);
+      prev_link.dispatchEvent(evObj);      
+    } else if (e.keyCode == 190 && next_link) {
+      next_link.focus();
+      var evObj = document.createEvent("MouseEvents");
+      evObj.initEvent("click", true, false);
+      next_link.dispatchEvent(evObj);
     }
 }
 
