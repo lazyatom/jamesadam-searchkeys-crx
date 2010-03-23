@@ -30,7 +30,8 @@ function init_searchkey() {
       if (displayKey == 10) {
           displayKey = 0;
       }
-      elmShortcut.innerHTML = "<span style='font-size:smaller;font-weight:bold;color:#999'> [" + displayKey + "]</span>";
+      elmShortcut.setAttribute("style", "font-size:smaller;font-weight:bold;color:#999");
+      elmShortcut.innerHTML = " [" + displayKey + "]";
       results[i].parentNode.appendChild(elmShortcut);
       injected_anything = true;
       if (i > 9) {
