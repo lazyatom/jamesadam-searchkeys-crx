@@ -22,37 +22,37 @@ function init_searchkey() {
     var injected_anything = false;
     var results = document.querySelectorAll(".g .r a.l:first-child");
     for (var i = 0; i < results.length; i++) {
-	search_results.push(results[i]);
-	var elmShortcut = document.createElement("span");
-	var displayKey = i + 1;
-	if (displayKey == 10) {
-	    displayKey = 0;
-	}
-	elmShortcut.innerHTML = "<span style='font-size:smaller;font-weight:bold;color:#999'> [" + displayKey + "]</span>";
-	results[i].parentNode.appendChild(elmShortcut);
-	injected_anything = true;
-	if (i > 9) {
-	    break;
-	}
+      search_results.push(results[i]);
+      var elmShortcut = document.createElement("span");
+      var displayKey = i + 1;
+      if (displayKey == 10) {
+          displayKey = 0;
+      }
+      elmShortcut.innerHTML = "<span style='font-size:smaller;font-weight:bold;color:#999'> [" + displayKey + "]</span>";
+      results[i].parentNode.appendChild(elmShortcut);
+      injected_anything = true;
+      if (i > 9) {
+          break;
+      }
     }
     return injected_anything;
 }
 
 function handle_searchkey(e) {
     if (e.altKey || e.metaKey || e.ctrlKey) {
-	return;
+      return;
     }
 
     var key = e.which - "0".charCodeAt(0);    
     if ((key >= 0) && (key <= 9)) {
-	if (key == 0) {
-	    key = 10;
-	}
-	var result_node = search_results[key - 1];
-	result_node.focus();
-	var evObj = document.createEvent("MouseEvents");
-	evObj.initEvent("click", true, false);
-	result_node.dispatchEvent(evObj);
+      if (key == 0) {
+          key = 10;
+      }
+      var result_node = search_results[key - 1];
+      result_node.focus();
+      var evObj = document.createEvent("MouseEvents");
+      evObj.initEvent("click", true, false);
+      result_node.dispatchEvent(evObj);
     }
 }
 
@@ -68,8 +68,8 @@ if (init_searchkey()) {
     enable_searchkey();
     var input_elements = document.getElementsByTagName("input");
     for (var i = 0; i < input_elements.length; i++) {
-	input_elements[i].addEventListener("focus", disable_searchkey);
-	input_elements[i].addEventListener("blur", enable_searchkey);
+      input_elements[i].addEventListener("focus", disable_searchkey);
+      input_elements[i].addEventListener("blur", enable_searchkey);
     }
 }
 
