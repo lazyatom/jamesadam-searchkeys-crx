@@ -55,6 +55,13 @@ function init_searchkey() {
     return injected_anything;
 }
 
+function click_on(element) {
+  element.focus();
+  var evObj = document.createEvent("MouseEvents");
+  evObj.initEvent("click", true, false);
+  element.dispatchEvent(evObj);
+}
+
 function handle_searchkey(e) {
     if (e.altKey || e.metaKey || e.ctrlKey) {
       return;
@@ -65,21 +72,11 @@ function handle_searchkey(e) {
       if (key == 0) {
           key = 10;
       }
-      var result_node = search_results[key - 1];
-      result_node.focus();
-      var evObj = document.createEvent("MouseEvents");
-      evObj.initEvent("click", true, false);
-      result_node.dispatchEvent(evObj);
+      click_on(search_results[key - 1]);
     } else if (e.keyCode == 188 && prev_link) {
-      prev_link.focus();
-      var evObj = document.createEvent("MouseEvents");
-      evObj.initEvent("click", true, false);
-      prev_link.dispatchEvent(evObj);      
+      click_on(prev_link);
     } else if (e.keyCode == 190 && next_link) {
-      next_link.focus();
-      var evObj = document.createEvent("MouseEvents");
-      evObj.initEvent("click", true, false);
-      next_link.dispatchEvent(evObj);
+      click_on(next_link);
     }
 }
 
